@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "agenda-20181006110817-authRole",
+            "UnauthRoleArn": "arn:aws:iam::793694364337:role/agenda-20181006110817-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::793694364337:role/agenda-20181006110817-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "agenda-20181006110817-deployment",
+            "UnauthRoleName": "agenda-20181006110817-unauthRole",
+            "StackName": "agenda-20181006110817",
+            "StackId": "arn:aws:cloudformation:us-east-1:793694364337:stack/agenda-20181006110817/a80f2230-c979-11e8-8f6f-500c217b4a9a"
+        }
+    }
+}

@@ -28,7 +28,8 @@
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientReadAttributes": [
-        "email"
+        "email",
+        "phone_number_verified"
     ],
     "mfaLambdaRole": "agendauth_totp_lambda_role",
     "mfaLambdaLogPolicy": "agendauth_totp_lambda_log_policy",
@@ -42,6 +43,7 @@
     "authSelections": "userPoolOnly",
     "resourceName": "agendauth",
     "userpoolClientWriteAttributes": [
+        "phone_number",
         "email"
     ],
     "unAuthRoleName": "agenda-20181006110817-unauthRole",

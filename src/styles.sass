@@ -1,0 +1,33 @@
+body
+  margin: 0
+  background-color: #eee
+
+input
+  border-radius: 5px
+  padding: 8px
+
+button
+  padding: 6px
+
+.container
+  display: grid
+  grid-template-areas: "form list"
+  grid-template-columns: 1fr 1fr
+
+.form-wrapper
+  grid-area: form
+  padding: 1em
+
+  form
+    display: flex
+    flex-direction: column
+
+    input, button
+      margin-bottom: 1em
+
+.list-wrapper
+  grid-area: list
+  padding: 1em
+
+  ul
+    padding-left: 1em

@@ -4,7 +4,10 @@ const awsmobile =  {
     "aws_project_region": "us-east-1",
     "aws_content_delivery_bucket": "agenda-hosting-bucket",
     "aws_content_delivery_bucket_region": "us-east-1",
-    "aws_content_delivery_url": "http://agenda-hosting-bucket.s3-website-us-east-1.amazonaws.com"
+    "aws_content_delivery_url": "http://agenda-hosting-bucket.s3-website-us-east-1.amazonaws.com",
+    "aws_cognito_region": "us-east-1",
+    "aws_user_pools_id": "us-east-1_u6OSNwnhY",
+    "aws_user_pools_web_client_id": "mffd1dsmjefcm06ikak5lgk9c"
 };
 
 

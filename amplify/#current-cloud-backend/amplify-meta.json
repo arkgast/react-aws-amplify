@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/agenda-20181006110817-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-10-06T15:17:04.653Z",
+			"lastPushTimeStamp": "2018-10-06T15:34:27.790Z",
 			"output": {
 				"S3BucketSecureURL": "https://agenda-hosting-bucket.s3.amazonaws.com",
 				"WebsiteURL": "http://agenda-hosting-bucket.s3-website-us-east-1.amazonaws.com",
@@ -27,6 +27,25 @@
 				"HostingBucketName": "agenda-hosting-bucket"
 			},
 			"lastPushDirHash": "gyVtaTla+eP7gUWp10Ugi73Z6yU="
+		}
+	},
+	"auth": {
+		"agendauth": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/agenda-20181006110817-deployment/amplify-cfn-templates/auth/agendauth-cloudformation-template.yml",
+				"logicalId": "authagendauth"
+			},
+			"lastPushTimeStamp": "2018-10-06T15:34:27.793Z",
+			"output": {
+				"AppClientSecret": "6i5tuhhldam8m388i5g3fqhaj7ejuibb729kvnbprbr13pakpf4",
+				"UserPoolId": "us-east-1_u6OSNwnhY",
+				"AppClientIDWeb": "mffd1dsmjefcm06ikak5lgk9c",
+				"AppClientID": "7t0n9ut5d40fstd0hli82j9lgm",
+				"UserPoolName": "agenda-auth-user-pool"
+			},
+			"lastPushDirHash": "4seqExih895rXRuJ5WT9kU6D46M="
 		}
 	}
 }

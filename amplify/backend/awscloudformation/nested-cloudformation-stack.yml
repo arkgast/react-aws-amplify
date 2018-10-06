@@ -84,6 +84,49 @@
 				"TemplateURL": "https://s3.amazonaws.com/agenda-20181006110817-deployment/amplify-cfn-templates/hosting/template.json",
 				"Parameters": {}
 			}
+		},
+		"authagendauth": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/agenda-20181006110817-deployment/amplify-cfn-templates/auth/agendauth-cloudformation-template.yml",
+				"Parameters": {
+					"userPoolName": "agenda-auth-user-pool",
+					"autoVerifiedAttributes": "email",
+					"mfaConfiguration": "OFF",
+					"mfaTypes": "SMS Text Message",
+					"roleName": "agendauth_sns-role",
+					"roleExternalId": "agendauth_role_external_id",
+					"policyName": "agendauth-sns-policy",
+					"smsAuthenticationMessage": "Your authentication code is {####}",
+					"smsVerificationMessage": "Your verification code is {####}",
+					"emailVerificationSubject": "Your verification code",
+					"emailVerificationMessage": "Your verification code is {####}",
+					"defaultPasswordPolicy": true,
+					"passwordPolicyMinLength": 8,
+					"passwordPolicyCharacters": "Requires Lowercase,Requires Uppercase,Requires Numbers",
+					"requiredAttributes": "email",
+					"userpoolClientName": "agendauth_app_client",
+					"userpoolClientGenerateSecret": true,
+					"userpoolClientRefreshTokenValidity": 30,
+					"userpoolClientReadAttributes": "email",
+					"mfaLambdaRole": "agendauth_totp_lambda_role",
+					"mfaLambdaLogPolicy": "agendauth_totp_lambda_log_policy",
+					"mfaPassRolePolicy": "agendauth_totp_pass_role_policy",
+					"mfaLambdaIAMPolicy": "agendauth_totp_lambda_iam_policy",
+					"userpoolClientLambdaRole": "agendauth_userpoolclient_lambda_role",
+					"userpoolClientLogPolicy": "agendauth_userpoolclient_lambda_log_policy",
+					"userpoolClientLambdaPolicy": "agendauth_userpoolclient_lambda_iam_policy",
+					"userpoolClientSetAttributes": true,
+					"useDefault": "manual",
+					"authSelections": "userPoolOnly",
+					"resourceName": "agendauth",
+					"userpoolClientWriteAttributes": "email",
+					"unAuthRoleName": "agenda-20181006110817-unauthRole",
+					"authRoleName": "agenda-20181006110817-authRole",
+					"unAuthRoleArn": "arn:aws:iam::793694364337:role/agenda-20181006110817-unauthRole",
+					"authRoleArn": "arn:aws:iam::793694364337:role/agenda-20181006110817-authRole"
+				}
+			}
 		}
 	},
 	"Outputs": {

@@ -3,6 +3,7 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { withAuthenticator } from 'aws-amplify-react'
 import { listStudents } from './graphql/queries'
 import { createStudent, deleteStudent, updateStudent } from './graphql/mutations'
+import { onCreateStudent, onUpdateStudent, onDeleteStudent } from './graphql/subscriptions'
 import { cloneDeep } from 'lodash'
 
 class App extends Component {
@@ -32,46 +33,18 @@ class App extends Component {
       this.createStudent()
     }
   }
-  createStudent = async () => {
-    const { student, studentList } = this.state
-    const response = await API.graphql(graphqlOperation(
-      createStudent, 
-      { input: student }
-    ))
-    const { createStudent: newStudent } = response.data
-    this.setState({
-      studentList: [ newStudent, ...studentList ],
-      student: {
-        name: '',
-        lastName: ''
-      }
-    })
+  createStudent = () => {
+    API.graphql(graphqlOperation(createStudent, {
+      input: this.state.student 
+    }))
   }
-  updateStudent = async () => {
-    const { student, studentList } = this.state
-    const response = await API.graphql(graphqlOperation(
-      updateStudent,
-      { input: student }
-    ))
-
-    const { updateStudent: newStudent } = response.data
-    const newList = cloneDeep(studentList)
-    let oldStudent = newList.filter(student => student.id === newStudent.id).pop()
-    oldStudent.name = newStudent.name
-    oldStudent.lastName = newStudent.lastName
-
-    this.setState({
-      studentList: newList,
-      student: { name: '', lastName: '' },
-      update: false
-    })
+  updateStudent = () => {
+    API.graphql(graphqlOperation(updateStudent, {
+      input: this.state.student
+    }))
   }
-  deleteStudent = studentId => async () => {
-    const result = await API.graphql(graphqlOperation(deleteStudent, { input: { id: studentId } }))
-    const { id } = result.data.deleteStudent
-    this.setState({
-      studentList: this.state.studentList.filter(student => student.id !== id)
-    })
+  deleteStudent = studentId => () => {
+    API.graphql(graphqlOperation(deleteStudent, { input: { id: studentId } }))
   }
   selectStudent = studentId => () => {
     const selectedStudent = this.state.studentList.filter(student => student.id === studentId)
@@ -89,10 +62,63 @@ class App extends Component {
       update: false
     })
   }
+  /**
+   * Creates a listener for every kind of change that occurs in the information
+   *
+   */
+  createListener = () => {
+    this.createSubscription = API.graphql(graphqlOperation(onCreateStudent))
+      .subscribe({
+        next: (eventData) => {
+          const { onCreateStudent: newStudent } = eventData.value.data
+          this.setState({
+            studentList: [ newStudent, ...this.state.studentList ],
+            student: { name: '', lastName: '' }
+          })
+        }
+      })
+
+    this.updateSubscription = API.graphql(graphqlOperation(onUpdateStudent))
+      .subscribe({
+        next: (eventData) => {
+          const { onUpdateStudent: newStudent } = eventData.value.data
+          const studentList = cloneDeep(this.state.studentList)
+          let oldStudent = studentList.filter(student => student.id === newStudent.id).pop()
+          oldStudent.name = newStudent.name
+          oldStudent.lastName = newStudent.lastName
+
+          this.setState({
+            studentList,
+            student: { name: '', lastName: '' },
+            update: false
+          })
+        }
+      })
+
+    this.deleteSubscription = API.graphql(graphqlOperation(onDeleteStudent))
+      .subscribe({
+        next: (eventData) => {
+          const { id } = eventData.value.data.onDeleteStudent
+          this.setState({
+            studentList: this.state.studentList.filter(student => student.id !== id)
+          })
+        }
+      })
+  }
+  removeListener = () => {
+    this.createSubscription.unsubscribe()
+    this.updateSubscription.unsubscribe()
+    this.deleteSubscription.unsubscribe()
+  }
   async componentDidMount () {
     const students = await API.graphql(graphqlOperation(listStudents))
     const { items: studentList } = students.data.listStudents
     this.setState({ studentList })
+
+    this.createListener()
+  }
+  componentWillUnmount () {
+    this.removeListener()
   }
   render() {
     const { student, studentList, update } = this.state

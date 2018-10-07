@@ -126,9 +126,13 @@ class App extends Component {
           <ul>
             {studentList.map((student, key) => (
               <li key={key}>
-                {student.name} {student.lastName}
-                <button onClick={this.selectStudent(student.id)}>Edit</button>
-                <button onClick={this.deleteStudent(student.id)}>Remove</button>
+                <div>
+                  {student.name} {student.lastName}
+                </div>
+                <div>
+                  <button onClick={this.selectStudent(student.id)}>Edit</button>
+                  <button onClick={this.deleteStudent(student.id)}>Remove</button>
+                </div>
               </li>
             ))}
           </ul>

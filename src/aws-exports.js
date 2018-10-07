@@ -7,7 +7,10 @@ const awsmobile =  {
     "aws_content_delivery_url": "http://agenda-hosting-bucket.s3-website-us-east-1.amazonaws.com",
     "aws_cognito_region": "us-east-1",
     "aws_user_pools_id": "us-east-1_u6OSNwnhY",
-    "aws_user_pools_web_client_id": "mffd1dsmjefcm06ikak5lgk9c"
+    "aws_user_pools_web_client_id": "mffd1dsmjefcm06ikak5lgk9c",
+    "aws_appsync_graphqlEndpoint": "https://cc3byf6uwjeqdafualpzwdjpja.appsync-api.us-east-1.amazonaws.com/graphql",
+    "aws_appsync_region": "us-east-1",
+    "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS"
 };
 
 

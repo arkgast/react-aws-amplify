@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { API, graphqlOperation } from 'aws-amplify'
 import { withAuthenticator } from 'aws-amplify-react'
+import { listStudents } from './graphql/queries'
+import { createStudent } from './graphql/mutations'
 
 class App extends Component {
   state = {
@@ -22,13 +25,25 @@ class App extends Component {
   handleSubmit = e => {
     e.preventDefault()
     const { student, studentList } = this.state
-    this.setState({
-      studentList: [ student, ...studentList ],
-      student: {
-        name: '',
-        lastName: ''
-      }
-    })
+    API.graphql(graphqlOperation(
+      createStudent, 
+      { input: student }
+    ))
+      .then(response => {
+        const { createStudent: student } = response.data
+        this.setState({
+          studentList: [ student, ...studentList ],
+          student: {
+            name: '',
+            lastName: ''
+          }
+        })
+      })
+  }
+  async componentDidMount () {
+    const students = await API.graphql(graphqlOperation(listStudents))
+    const { items: studentList } = students.data.listStudents
+    this.setState({ studentList })
   }
   render() {
     const { student, studentList } = this.state

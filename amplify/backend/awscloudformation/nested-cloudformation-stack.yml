@@ -127,6 +127,25 @@
 					"authRoleArn": "arn:aws:iam::793694364337:role/agenda-20181006110817-authRole"
 				}
 			}
+		},
+		"apiagenda": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/agenda-20181006110817-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"Parameters": {
+					"AppSyncApiName": "agenda",
+					"AuthCognitoUserPoolId": {
+						"Fn::GetAtt": [
+							"authagendauth",
+							"Outputs.UserPoolId"
+						]
+					},
+					"schemaGraphql": "s3://agenda-20181006110817-deployment/amplify-appsync-files/schema.graphql.1538852434789",
+					"ResolverBucket": "agenda-20181006110817-deployment",
+					"ResolverRootKey": "amplify-appsync-files",
+					"DeploymentTimestamp": "1538852434789"
+				}
+			}
 		}
 	},
 	"Outputs": {

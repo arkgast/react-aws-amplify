@@ -1,0 +1,111 @@
+type Student {
+  id: ID!
+  name: String!
+  lastName: String
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelStudentConnection {
+  items: [Student]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelStudentFilterInput {
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  lastName: ModelStringFilterInput
+  and: [ModelStudentFilterInput]
+  or: [ModelStudentFilterInput]
+  not: ModelStudentFilterInput
+}
+
+type Query {
+  getStudent(id: ID!): Student
+  listStudents(filter: ModelStudentFilterInput, limit: Int, nextToken: String): ModelStudentConnection
+}
+
+input CreateStudentInput {
+  name: String!
+  lastName: String
+}
+
+input UpdateStudentInput {
+  id: ID!
+  name: String
+  lastName: String
+}
+
+input DeleteStudentInput {
+  id: ID
+}
+
+type Mutation {
+  createStudent(input: CreateStudentInput!): Student
+  updateStudent(input: UpdateStudentInput!): Student
+  deleteStudent(input: DeleteStudentInput!): Student
+}
+
+type Subscription {
+  onCreateStudent: Student @aws_subscribe(mutations: ["createStudent"])
+  onUpdateStudent: Student @aws_subscribe(mutations: ["updateStudent"])
+  onDeleteStudent: Student @aws_subscribe(mutations: ["deleteStudent"])
+}

@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/agenda-20181006110817-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-10-06T15:43:23.235Z",
+			"lastPushTimeStamp": "2018-10-06T19:03:27.525Z",
 			"output": {
 				"S3BucketSecureURL": "https://agenda-hosting-bucket.s3.amazonaws.com",
 				"WebsiteURL": "http://agenda-hosting-bucket.s3-website-us-east-1.amazonaws.com",
@@ -37,7 +37,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/agenda-20181006110817-deployment/amplify-cfn-templates/auth/agendauth-cloudformation-template.yml",
 				"logicalId": "authagendauth"
 			},
-			"lastPushTimeStamp": "2018-10-06T15:43:23.238Z",
+			"lastPushTimeStamp": "2018-10-06T19:03:27.526Z",
 			"output": {
 				"AppClientSecret": "6i5tuhhldam8m388i5g3fqhaj7ejuibb729kvnbprbr13pakpf4",
 				"UserPoolId": "us-east-1_u6OSNwnhY",
@@ -47,6 +47,27 @@
 			},
 			"lastPushDirHash": "sjDXRRKZxEfaYOT7rYaIpt4Hf1s=",
 			"[object Object]": {}
+		}
+	},
+	"api": {
+		"agenda": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "AMAZON_COGNITO_USER_POOLS",
+				"GraphQLAPIIdOutput": "576yx2rlcvdazbsjpb56ru4rha",
+				"GraphQLAPIEndpointOutput": "https://cc3byf6uwjeqdafualpzwdjpja.appsync-api.us-east-1.amazonaws.com/graphql",
+				"GraphQLAPIKeyOutput": "da2-wwroaepst5hurmxvbkwiprijkm",
+				"AuthCognitoUserPoolIdOutput": "us-east-1_u6OSNwnhY",
+				"AuthCognitoUserPoolNativeClientId": "See UserPool: us-east-1_u6OSNwnhY",
+				"AuthCognitoUserPoolJSClientId": "See UserPool: us-east-1_u6OSNwnhY"
+			},
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/agenda-20181006110817-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apiagenda"
+			},
+			"lastPushTimeStamp": "2018-10-06T19:03:29.830Z",
+			"lastPushDirHash": "WmkrSrW59UjAO6SodUmuLi9dBIM="
 		}
 	}
 }
